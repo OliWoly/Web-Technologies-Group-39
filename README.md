@@ -1,9 +1,9 @@
 # This is Web Technologies Group 39 Project
 
-### Made by:
+## Contributors:
 - Oliwier Kulczycki
 - Abbas Babar
 
-
-
-abbas test
+# Goals
+- Make working navigation bar.
+- Host on github.
