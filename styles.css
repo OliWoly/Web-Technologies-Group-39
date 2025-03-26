@@ -1,4 +1,5 @@
 .nav-main {
+    align-self: center;
     background-color: aquamarine;
     font-family: monospace;
     color:aliceblue;
@@ -10,15 +11,13 @@
 
 .nav-sub {
     background-color: red;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: rodfat;
     text-align: center;
     width: 100px;
     height: 30px;
     color: black;
-
     padding:10px;
     display: inline-block;
-
     margin: 10px;
 }
 
@@ -39,12 +38,13 @@ a:active {
 }
 
 body {
-    display: flex;
-    justify-content: center; /* Horizontally center */
-    align-items: center;     /* Vertically center */
-    height: 100vh;           /* Full viewport height */
+    justify-content: center;
+    height: 100vh;           
     margin: 0;               /* Remove default margin */
     background-color: #f0f0f0; /* Optional background color */
+
+    display: flex;
+    flex-direction: column;
 }
 
 canvas {
@@ -53,11 +53,10 @@ canvas {
 }
 
 h1 {
-    position: absolute;
-    top: 20px; /* Optional: Move the title near the top */
     left: 50%;
     transform: translateX(-50%);
     font-family: rodfat;
+    justify-content: center;
 }
 
 @font-face {
@@ -66,8 +65,7 @@ h1 {
 }
 
 #scoretitle{
-    flex: left;
-    align-items: left;
+    justify-content: center;
     padding: 2%;
     margin-right: 100px;
 
