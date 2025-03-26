@@ -1,0 +1,74 @@
+.nav-main {
+    background-color: aquamarine;
+    font-family: monospace;
+    color:aliceblue;
+    overflow: hidden;
+    text-align: center;
+
+    width:600px;
+}
+
+.nav-sub {
+    background-color: red;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    color: black;
+
+    padding:10px;
+    display: inline-block;
+
+    margin: 10px;
+}
+
+a:visited {
+    color: black;
+}
+
+a:link {
+    color: black;
+}
+
+a:hover {
+    color: black;
+}
+
+a:active {
+    color: black;
+}
+
+body {
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center;     /* Vertically center */
+    height: 100vh;           /* Full viewport height */
+    margin: 0;               /* Remove default margin */
+    background-color: #f0f0f0; /* Optional background color */
+}
+
+canvas {
+    border: 1px solid black;  /* Border around the canvas */
+    background-color: #2f354d;
+}
+
+h1 {
+    position: absolute;
+    top: 20px; /* Optional: Move the title near the top */
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: rodfat;
+}
+
+@font-face {
+    font-family: rodfat;
+    src: url(Rodfat_2.ttf);
+}
+
+#scoretitle{
+    flex: left;
+    align-items: left;
+    padding: 2%;
+    margin-right: 100px;
+
+}

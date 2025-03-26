@@ -12,7 +12,7 @@ let dartboardY = (canvas.height / 2) - (dartboardH/2); // Adjust based on image 
 
 // Load dartboard image
 const dartboardImage = new Image();
-dartboardImage.src = 'dartboard.jpg';
+dartboardImage.src = 'dartboard.png';
 
 dartboardImage.onload = () => {
     drawDartboard(); // Draw dartboard when image is loaded
@@ -70,8 +70,21 @@ function moveDartboard(event) {
     }
 
     // Prevent the dartboard from going out of bounds
-    dartboardX = Math.max(0, Math.min(canvas.width - 100, dartboardX)); // Ensure within canvas width
-    dartboardY = Math.max(0, Math.min(canvas.height - 100, dartboardY)); // Ensure within canvas height
+
+    // Currently magic numbers, figure out how to use variables for this.
+    if (dartboardX + dartboardW > 700){
+        dartboardX = 700 - dartboardW;
+    }
+    if (dartboardY + dartboardH > 800){
+        dartboardY = 800 - dartboardH;
+    }
+    if (dartboardX < 0){
+        dartboardX = 0;
+    }
+    if (dartboardY < 0){
+        dartboardY = 0;
+    }
+
 
     drawDartboard();
 }
