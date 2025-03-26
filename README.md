@@ -1,6 +1,6 @@
 # This is Web Technologies Group 39 Project
 
-**Visit the website below.**
+**Visit the website:**
 https://oliwoly.github.io/Web-Technologies-Group-39/
 
 ## Contributors:
@@ -8,5 +8,14 @@ https://oliwoly.github.io/Web-Technologies-Group-39/
 - Abbas Babar
 
 # Goals
-- Make working navigation bar.
-- Host on github.
+- Make working navigation bar. ✅
+- Host on github. ✅
+
+# Process
+
+Using phaser.js as a simple framework for creating the game.
+
+## References
+
+Initial Tutorial used for phaser.js
+https://www.youtube.com/watch?v=0qtg-9M3peI
