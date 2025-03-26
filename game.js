@@ -4,12 +4,15 @@ const scoreElement = document.getElementById('score');
 let score = 0;
 
 // Set initial position for dartboard
-let dartboardX = canvas.width / 2 - 50;  // Adjust based on image size
-let dartboardY = canvas.height / 2 - 50; // Adjust based on image size
+let dartboardW = 300;
+let dartboardH = 300;
+
+let dartboardX = (canvas.width / 2) - (dartboardW/2);  // Adjust based on image size
+let dartboardY = (canvas.height / 2) - (dartboardH/2); // Adjust based on image size
 
 // Load dartboard image
 const dartboardImage = new Image();
-dartboardImage.src = 'dartboard.jpg';  // Make sure to use your own dartboard image URL
+dartboardImage.src = 'dartboard.jpg';
 
 dartboardImage.onload = () => {
     drawDartboard(); // Draw dartboard when image is loaded
@@ -18,7 +21,7 @@ dartboardImage.onload = () => {
 // Draw dartboard at the current position
 function drawDartboard() {
     ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas before drawing
-    ctx.drawImage(dartboardImage, dartboardX, dartboardY, 100, 100);  // You can adjust the size
+    ctx.drawImage(dartboardImage, dartboardX, dartboardY, dartboardW, dartboardH);  // You can adjust the size
 }
 
 // Handle click event
@@ -28,8 +31,8 @@ function handleClick(event) {
     const y = event.clientY - rect.top;
 
     // Calculate distance from dartboard center
-    const dartboardCenterX = dartboardX + 50; // Middle of the dartboard image
-    const dartboardCenterY = dartboardY + 50; // Middle of the dartboard image
+    const dartboardCenterX = dartboardX + (dartboardW/2); // Middle of the dartboard image
+    const dartboardCenterY = dartboardY + (dartboardH/2); // Middle of the dartboard image
     const distance = Math.sqrt((x - dartboardCenterX) ** 2 + (y - dartboardCenterY) ** 2);
     
     // Assign score based on distance
@@ -39,9 +42,10 @@ function handleClick(event) {
         score += 80;
     } else if (distance < 60) {
         score += 60;
-    } else {
-        score += 40;
+    } else if (distance > dartboardW/2){
+        score += 0;
     }
+
 
     scoreElement.textContent = score;
 }

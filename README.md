@@ -18,8 +18,8 @@ https://oliwoly.github.io/Web-Technologies-Group-39/
 ## Game Features
 - Display dartboard
     - Make it move
-    - Make the point scoring accurate
-    - Make it the correct size
+    - Make the point scoring accurate ✅/❌
+    - Make it the correct size ✅
 
 - Add rounds
     - Add only three shots per round
