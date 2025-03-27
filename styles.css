@@ -18,13 +18,13 @@
     background: darken(gray , 50%);
     }
     
-@media all and (max-width: 2000px) {
+@media all and (max-width: 4000px) {
     .navigation {
     justify-content: space-around;
     }
 }
 
-@media all and (max-width: 600px) {
+@media all and (max-width: 1000px) {
     .navigation {
         flex-flow: column wrap;
         padding: 0;
