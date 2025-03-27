@@ -101,8 +101,6 @@ canvas {
 }
 
 h1 {
-    left: 50%;
-    transform: translateX(-50%);
     font-family: rodfat;
     justify-content: center;
 }
