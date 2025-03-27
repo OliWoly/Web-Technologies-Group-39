@@ -1,7 +1,7 @@
 # This is Web Technologies Group 39 Project
 
 **Visit the website:**
-https://oliwoly.github.io/Web-Technologies-Group-39/tree/development
+https://oliwoly.github.io/Web-Technologies-Group-39/tree/development/
 
 ## Contributors:
 - Oliwier Kulczycki
