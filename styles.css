@@ -45,6 +45,10 @@ body {
     background: #fff;
     color: #4a4a4a;
 }
+
+title {
+    background: gray;
+}
     
 info {
     background: #eee;
@@ -60,10 +64,17 @@ body {
     grid-template-columns: 200px 1fr 150px;
     grid-template-rows: min-content 1fr min-content;
 }
+
+title {
+    grid-row: 0;
+    grid-column: 1-4;
+    padding: 0 5px;
+}
     
 .navigation {
     grid-row: 1;
     grid-column: 1 / 4;
+    padding: 0 5px;
 }
     
 info {
