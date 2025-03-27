@@ -18,7 +18,7 @@
     background: darken(gray , 50%);
     }
     
-@media all and (max-width: 4000px) {
+@media all and (max-width: 2000px) {
     .navigation {
     justify-content: space-around;
     }
