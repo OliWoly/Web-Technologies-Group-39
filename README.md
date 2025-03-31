@@ -35,3 +35,4 @@ Keeping it simple by not using any javascript frameworks, a simple game like thi
 ## References
 Angle calculations
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2
+https://stackoverflow.com/questions/1955687/best-way-for-simple-game-loop-in-javascript

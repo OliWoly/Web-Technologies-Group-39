@@ -8,19 +8,27 @@
 </head>
 <body>
     <!-- Navigation bar --> 
-    <ul class="navigation">
-		<li><a href="index.html">Home</a></li>
-		<li><a href="game.html">Game</li>
-		<li><a href="scores.html">Scores</a></li>
-		<li><a href="rules.html">Rules</a></li>
-	</ul>
-    <info>
-        <h1>Dartboard Game</h1>
-        <p id="scoretitle">Score: <span id="score">0</span>
-    </info>
+    <div class="navMain">
+		<div class="navObj"><a href="index.html">Home</a></div>
+		<div class="navObj"><a href="game.html">Game</div>
+		<div class="navObj"><a href="scores.html">Scores</a></div>
+		<div class="navObj"><a href="rules.html">Rules</a></div>
+    </div>
+
     <main>
-        <canvas id="dartboard" width="700" height="800"></canvas>
-        <script src="game.js"></script>
+        <div class="stats">
+            <div id="gametitle">
+                <h1>Dartboard Game</h1>
+            </div>
+            <div id="scorediv">
+                <p id="scoretitle">Score: <span id="score">0</span>
+            </div>
+        </div>
+
+        <div class="gamediv">
+            <canvas id="dartboard" width="700" height="800"></canvas>
+            <script src="game.js"></script>
+        </div>
     </main>
 </body>
 </html>

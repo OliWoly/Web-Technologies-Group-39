@@ -11,7 +11,7 @@ canvas.addEventListener('click', handleClick);
 let dartboardW = 300;
 let dartboardH = 300;
 let speed = 7;
-let direction = 0
+let direction = 30;
 
 let dartboardX = (canvas.width / 2) - (dartboardW/2);  // Adjust based on image size
 let dartboardY = (canvas.height / 2) - (dartboardH/2); 
@@ -206,40 +206,53 @@ function handleClick(event) {
     calculateScore(x, y, dartboardCenterX, dartboardCenterY);
 }
 
-function invertDirection(){
-    direction += 180;
+function bounceOfWall(isVertical) {
+    if (isVertical) {
+        direction = 180 - direction; // Reflect angle horizontally
+    } else {
+        direction = -direction; // Reflect angle vertically
+    }
+
+    // Normalize direction to keep it between 0° and 360°
+    if (direction < 0) {
+        direction += 360;
+    }
+    if (direction >= 360) {
+        direction -= 360;
+    }
 }
 
+
 // Move dartboard with arrow keys
-function moveDartboard(event) {
+function moveDartboard() {
+    dartboardX += Math.cos(direction * Math.PI / 180) * speed;
+    dartboardY += Math.sin(direction * Math.PI / 180) * speed;
 
-    dartboardX += Math.cos(direction) * speed;
-    dartboardY += Math.sin(direction) * speed;
+    direction += Math.random();
 
-    direction += 0.05;
-
-    // Prevent the dartboard from going out of bounds
-    // Currently magic numbers, figure out how to use variables for this.
-    if (dartboardX + dartboardW > 700){
-        dartboardX = 700 - dartboardW;
-        invertDirection();
+    // Bounce off vertical walls (left/right)
+    if (dartboardX + dartboardW >= canvas.width) {
+        dartboardX = canvas.width - dartboardW;
+        bounceOfWall(true); // Vertical bounce
     }
-    if (dartboardY + dartboardH > 800){
-        dartboardY = 800 - dartboardH;
-        invertDirection();
-    }
-    if (dartboardX < 0){
+    if (dartboardX <= 0) {
         dartboardX = 0;
-        invertDirection();
-    }
-    if (dartboardY < 0){
-        dartboardY = 0;
-        invertDirection();
+        bounceOfWall(true); // Vertical bounce
     }
 
+    // Bounce off horizontal walls (top/bottom)
+    if (dartboardY + dartboardH >= canvas.height) {
+        dartboardY = canvas.height - dartboardH;
+        bounceOfWall(false); // Horizontal bounce
+    }
+    if (dartboardY <= 0) {
+        dartboardY = 0;
+        bounceOfWall(false); // Horizontal bounce
+    }
 
     draw();
 }
+
 
 
 
