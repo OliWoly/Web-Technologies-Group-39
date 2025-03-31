@@ -10,7 +10,7 @@ canvas.addEventListener('click', handleClick);
 // since its a circle it will stay the same no matter what, no adjustments should be made.
 let dartboardW = 300;
 let dartboardH = 300;
-let speed = 5;
+let speed = 7;
 let direction = 0
 
 let dartboardX = (canvas.width / 2) - (dartboardW/2);  // Adjust based on image size
@@ -206,6 +206,10 @@ function handleClick(event) {
     calculateScore(x, y, dartboardCenterX, dartboardCenterY);
 }
 
+function invertDirection(){
+    direction += 180;
+}
+
 // Move dartboard with arrow keys
 function moveDartboard(event) {
 
@@ -218,15 +222,19 @@ function moveDartboard(event) {
     // Currently magic numbers, figure out how to use variables for this.
     if (dartboardX + dartboardW > 700){
         dartboardX = 700 - dartboardW;
+        invertDirection();
     }
     if (dartboardY + dartboardH > 800){
         dartboardY = 800 - dartboardH;
+        invertDirection();
     }
     if (dartboardX < 0){
         dartboardX = 0;
+        invertDirection();
     }
     if (dartboardY < 0){
         dartboardY = 0;
+        invertDirection();
     }
 
 
