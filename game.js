@@ -4,36 +4,73 @@ const scoreElement = document.getElementById('score');
 let score = 0;
 
 // Set initial position for dartboard
+// for or intents and purposes, use width as diameter..
+// since its a circle it will stay the same no matter what, no adjustments should be made.
 let dartboardW = 300;
 let dartboardH = 300;
 
 let dartboardX = (canvas.width / 2) - (dartboardW/2);  // Adjust based on image size
-let dartboardY = (canvas.height / 2) - (dartboardH/2); // Adjust based on image size
+let dartboardY = (canvas.height / 2) - (dartboardH/2); 
 
 // Load dartboard image
 const dartboardImage = new Image();
 dartboardImage.src = 'dartboard.png';
 
 dartboardImage.onload = () => {
-    drawDartboard(); // Draw dartboard when image is loaded
+    drawDartboard();
 };
 
-// Draw dartboard at the current position
-function drawDartboard() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas before drawing
-    ctx.drawImage(dartboardImage, dartboardX, dartboardY, dartboardW, dartboardH);  // You can adjust the size
+// Changes the colour of the score text to red breifly when scoring
+function changeScoreColourOnScore() {
+    let initial = [255, 0, 0];
+    let final = [...initial];
+    let steps = 30;
+    let stepSize = 255 / steps;
+    let currentStep = 0;
+
+    function updateColor() {
+        if (currentStep >= steps) {
+            return; // Stop if done
+        }
+
+        final[0] -= stepSize;
+        final[0] = Math.max(final[0], 0);
+        scoreElement.style.color = `rgb(${Math.round(final[0])}, ${final[1]}, ${final[2]})`;
+
+        currentStep++;
+        requestAnimationFrame(updateColor);
+    }
+    requestAnimationFrame(updateColor);
 }
 
-// Handle click event
+
+function drawDartboard() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas before drawing
+    ctx.drawImage(dartboardImage, dartboardX, dartboardY, dartboardW, dartboardH);
+}
+
+function calculateScore(x, y) {
+    x = x;
+    y = y;
+
+    angle = (Math.atan2(y + (dartboardX), x + (dartboardY)) * 180) / Math.PI;
+
+    console.log(angle);
+}
+
+// handle clicks
 function handleClick(event) {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
+    changeScoreColourOnScore();
 
     // Calculate distance from dartboard center
-    const dartboardCenterX = dartboardX + (dartboardW/2); // Middle of the dartboard image
-    const dartboardCenterY = dartboardY + (dartboardH/2); // Middle of the dartboard image
+    const dartboardCenterX = dartboardX + (dartboardW/2); // Middle of the dartboard
+    const dartboardCenterY = dartboardY + (dartboardH/2); 
     const distance = Math.sqrt((x - dartboardCenterX) ** 2 + (y - dartboardCenterY) ** 2);
+
+    calculateScore(x, y);
     
     // Assign score based on distance
     if (distance < 20) {
@@ -89,7 +126,6 @@ function moveDartboard(event) {
     drawDartboard();
 }
 
-// Add event listeners
 canvas.addEventListener('click', handleClick);
 document.addEventListener('keydown', moveDartboard);
 
