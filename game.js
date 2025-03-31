@@ -49,11 +49,17 @@ function drawDartboard() {
     ctx.drawImage(dartboardImage, dartboardX, dartboardY, dartboardW, dartboardH);
 }
 
-function calculateScore(x, y) {
+function calculateScore(x, y, dartboardCenterX, dartboardCenterY) {
     x = x;
     y = y;
 
-    angle = (Math.atan2(y + (dartboardX), x + (dartboardY)) * 180) / Math.PI;
+    // Angle Discriptor for visualisation.
+    //                          90°
+    //                           |
+    //      -180°/180°      <-- -+- -->         0°
+    //                           |
+    //                         -90°
+    angle = (Math.atan2(dartboardCenterY - y, x - dartboardCenterX) * 180) / Math.PI;
 
     console.log(angle);
 }
@@ -70,7 +76,7 @@ function handleClick(event) {
     const dartboardCenterY = dartboardY + (dartboardH/2); 
     const distance = Math.sqrt((x - dartboardCenterX) ** 2 + (y - dartboardCenterY) ** 2);
 
-    calculateScore(x, y);
+    calculateScore(x, y, dartboardCenterX, dartboardCenterY);
     
     // Assign score based on distance
     if (distance < 20) {
