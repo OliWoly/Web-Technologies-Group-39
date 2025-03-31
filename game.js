@@ -45,23 +45,105 @@ function changeScoreColourOnScore() {
 
 
 function drawDartboard() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas before drawing
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(dartboardImage, dartboardX, dartboardY, dartboardW, dartboardH);
 }
 
 function calculateScore(x, y, dartboardCenterX, dartboardCenterY) {
-    x = x;
-    y = y;
-
     // Angle Discriptor for visualisation.
     //                          90°
     //                           |
     //      -180°/180°      <-- -+- -->         0°
     //                           |
     //                         -90°
-    angle = (Math.atan2(dartboardCenterY - y, x - dartboardCenterX) * 180) / Math.PI;
 
-    console.log(angle);
+    // Still a total range of 360°. 
+    // Might change to constant offset so that top is 0° and circles to 360 rather than 180.
+
+    // Offset with the location of the dartboard.
+    // converts from radians to °.
+    angle = (Math.atan2(dartboardCenterY - y, x - dartboardCenterX) * 180) / Math.PI;
+    distance = Math.sqrt((x - dartboardCenterX) ** 2 + (y - dartboardCenterY) ** 2);
+    
+
+    // Each scoring "zone" is 1/20th of the board.
+    // 360/20 = 18°
+    // First "zone" - 20, is centered meaning its not 90 + 18, its:
+    // 90 - 9, 90 + 9, total angle = 18°.
+
+    // angle based
+    base = 20;
+    // distance based
+    mult = 1;
+
+    // Angle Calculation
+    {
+        if (angle <= 99 && angle > 81){
+            base = 20;
+        }
+        if (angle <= 81 && angle > 63){
+            base = 1;
+        }
+        if (angle <= 63 && angle > 45){
+            base = 18;
+        }
+        if (angle <= 45 && angle > 27){
+            base = 4;
+        }
+        if (angle <= 27 && angle > 9){
+            base = 13;
+        }
+        if (angle <= 9 && angle > -9){
+            base = 6;
+        }
+        if (angle <= -9 && angle > -27){
+            base = 10;
+        }
+        if (angle <= -27 && angle > -45){
+            base = 15;
+        }
+        if (angle <= -45 && angle > -63){
+            base = 2;
+        }
+        if (angle <= -63 && angle > -81){
+            base = 17;
+        }
+        if (angle <= -81 && angle > -99){
+            base = 3;
+        }
+        if (angle <= -99 && angle > -117){
+            base = 19;
+        }
+        if (angle <= -117 && angle > -135){
+            base = 7;
+        }
+        if (angle <= -135 && angle > -153){
+            base = 16;
+        }
+        if (angle <= -153 && angle > -171){
+            base = 8;
+        }
+        if (angle <= -171 && angle > 171){
+            base = 11;
+        }
+        if (angle <= 171 && angle > 153){
+            base = 14;
+        }
+        if (angle <= 153 && angle > 135){
+            base = 9;
+        }
+        if (angle <= 135 && angle > 117){
+            base = 12;
+        }
+        if (angle <= 117 && angle > 99){
+            base = 5;
+        }
+    }
+    
+    score += base * mult
+    console.log(base);
+    scoreElement.textContent = score;
+    
 }
 
 // handle clicks
@@ -69,28 +151,14 @@ function handleClick(event) {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-    changeScoreColourOnScore();
 
-    // Calculate distance from dartboard center
-    const dartboardCenterX = dartboardX + (dartboardW/2); // Middle of the dartboard
-    const dartboardCenterY = dartboardY + (dartboardH/2); 
-    const distance = Math.sqrt((x - dartboardCenterX) ** 2 + (y - dartboardCenterY) ** 2);
+    const dartboardCenterX = dartboardX + (dartboardW/2);
+    const dartboardCenterY = dartboardY + (dartboardH/2);
 
     calculateScore(x, y, dartboardCenterX, dartboardCenterY);
+
+    changeScoreColourOnScore();
     
-    // Assign score based on distance
-    if (distance < 20) {
-        score += 100;
-    } else if (distance < 40) {
-        score += 80;
-    } else if (distance < 60) {
-        score += 60;
-    } else if (distance > dartboardW/2){
-        score += 0;
-    }
-
-
-    scoreElement.textContent = score;
 }
 
 // Move dartboard with arrow keys
