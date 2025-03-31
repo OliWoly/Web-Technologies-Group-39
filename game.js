@@ -72,11 +72,13 @@ function calculateScore(x, y, dartboardCenterX, dartboardCenterY) {
     // 90 - 9, 90 + 9, total angle = 18°.
 
     // angle based
-    base = 20;
+    base = 0;
     // distance based
     mult = 1;
 
     // Angle Calculation
+    // Disgusting, massive but easiest to manage
+    // Encased so you can close it.
     {
         if (angle <= 99 && angle > 81){
             base = 20;
@@ -139,9 +141,47 @@ function calculateScore(x, y, dartboardCenterX, dartboardCenterY) {
             base = 5;
         }
     }
+
+    // Distance Calculation
+    // Following information based on current image of dartboard at 300px diameter
+    // (new one could be used but same proportions necessary)
+
+    // Calculations should be done in % for consistency and ability to change size later.
+    // Scoring area is only 80% of the total radius. 120px out vs 150px total.
+    // Double scoring is 110 - 120. 73.334% - 80%
+    // Triple scoring is 65 - 75. 43.334% - 50%
+    // Double bull is 5 - 10.x. 0.0334% - 0.07%
+    // Inside bullseye is 0 - 5, 0% - 0.0334%
+    {
+        radius = dartboardH/2;
+
+        // out of board
+        if (distance > radius * 0.8){
+            mult = 0;
+        }
+        // Double zone
+        if (distance > (radius * 0.7334) && distance < (radius * 0.8)){
+            mult = 2;
+        }
+        // Triple zone
+        if (distance > (radius * 0.4334) && distance < (radius * 0.5)){
+            mult = 3;
+        }
+        // Double Bull
+        if (distance > (radius * 0.0334) && distance < (radius * 0.07)){
+            base = 25;
+            mult = 1;
+        }
+        // Bullseye
+        if (distance < (radius * 0.0334)){
+            base = 50;
+            mult = 1;
+        }
+    }
     
+    // Calculate score with given variables.
     score += base * mult
-    console.log(base);
+
     scoreElement.textContent = score;
     
 }
