@@ -18,7 +18,9 @@ https://oliwoly.github.io/Web-Technologies-Group-39/
 ## Game Features
 - Display dartboard
     - Make it move
-    - Make the point scoring accurate ✅/❌
+    - Make the point scoring accurate ✅
+        - Flash most recent score
+        - Flash score when scored ✅
     - Make it the correct size ✅
 
 - Add rounds
@@ -28,6 +30,8 @@ https://oliwoly.github.io/Web-Technologies-Group-39/
 - Make look nice 
 
 # Process
-Keeping it simple by not using any javascript frameworks, a simpe game like this does not require any and it would make it much more complicated.
+Keeping it simple by not using any javascript frameworks, a simple game like this does not require any and it would make it much more complicated.
 
 ## References
+Angle calculations
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2

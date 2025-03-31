@@ -3,11 +3,15 @@ const ctx = canvas.getContext('2d');
 const scoreElement = document.getElementById('score');
 let score = 0;
 
+canvas.addEventListener('click', handleClick);
+
 // Set initial position for dartboard
 // for or intents and purposes, use width as diameter..
 // since its a circle it will stay the same no matter what, no adjustments should be made.
 let dartboardW = 300;
 let dartboardH = 300;
+let speed = 5;
+let direction = 0
 
 let dartboardX = (canvas.width / 2) - (dartboardW/2);  // Adjust based on image size
 let dartboardY = (canvas.height / 2) - (dartboardH/2); 
@@ -16,13 +20,9 @@ let dartboardY = (canvas.height / 2) - (dartboardH/2);
 const dartboardImage = new Image();
 dartboardImage.src = 'dartboard.png';
 
-dartboardImage.onload = () => {
-    drawDartboard();
-};
-
 // Changes the colour of the score text to red breifly when scoring
-function changeScoreColourOnScore() {
-    let initial = [255, 0, 0];
+function changeScoreColourOnScore(colour) {
+    let initial = colour;
     let final = [...initial];
     let steps = 30;
     let stepSize = 255 / steps;
@@ -43,8 +43,7 @@ function changeScoreColourOnScore() {
     requestAnimationFrame(updateColor);
 }
 
-
-function drawDartboard() {
+function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(dartboardImage, dartboardX, dartboardY, dartboardW, dartboardH);
 }
@@ -78,7 +77,6 @@ function calculateScore(x, y, dartboardCenterX, dartboardCenterY) {
 
     // Angle Calculation
     // Disgusting, massive but easiest to manage
-    // Encased so you can close it.
     {
         if (angle <= 99 && angle > 81){
             base = 20;
@@ -142,16 +140,19 @@ function calculateScore(x, y, dartboardCenterX, dartboardCenterY) {
         }
     }
 
-    // Distance Calculation
-    // Following information based on current image of dartboard at 300px diameter
-    // (new one could be used but same proportions necessary)
+    // Distance numbers
+    {
+        // Following information based on current image of dartboard at 300px diameter
+        // (new one could be used but same proportions necessary)
+        // Calculations should be done in % for consistency and ability to change size later.
+        // Scoring area is only 80% of the total radius. 120px out vs 150px total.
+        // Double scoring is 110 - 120. 73.334% - 80%
+        // Triple scoring is 65 - 75. 43.334% - 50%
+        // Double bull is 5 - 10.x. 0.0334% - 0.07%
+        // Inside bullseye is 0 - 5, 0% - 0.0334%
+    }
 
-    // Calculations should be done in % for consistency and ability to change size later.
-    // Scoring area is only 80% of the total radius. 120px out vs 150px total.
-    // Double scoring is 110 - 120. 73.334% - 80%
-    // Triple scoring is 65 - 75. 43.334% - 50%
-    // Double bull is 5 - 10.x. 0.0334% - 0.07%
-    // Inside bullseye is 0 - 5, 0% - 0.0334%
+    // Distance Calculation
     {
         radius = dartboardH/2;
 
@@ -181,12 +182,19 @@ function calculateScore(x, y, dartboardCenterX, dartboardCenterY) {
     
     // Calculate score with given variables.
     score += base * mult
+    // Flash if scored
+    if (mult > 0){
+        changeScoreColourOnScore([255, 0, 0]);
+    }
+    else {
+        changeScoreColourOnScore([255, 255, 255]);
+    }
 
     scoreElement.textContent = score;
     
 }
 
-// handle clicks
+// Handle clicks
 function handleClick(event) {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
@@ -196,32 +204,17 @@ function handleClick(event) {
     const dartboardCenterY = dartboardY + (dartboardH/2);
 
     calculateScore(x, y, dartboardCenterX, dartboardCenterY);
-
-    changeScoreColourOnScore();
-    
 }
 
 // Move dartboard with arrow keys
 function moveDartboard(event) {
-    const step = 10; // Speed of movement
 
-    switch(event.key) {
-        case 'ArrowUp':
-            dartboardY -= step;
-            break;
-        case 'ArrowDown':
-            dartboardY += step;
-            break;
-        case 'ArrowLeft':
-            dartboardX -= step;
-            break;
-        case 'ArrowRight':
-            dartboardX += step;
-            break;
-    }
+    //dartboardX += Math.cos(direction) * speed;
+    //dartboardY += Math.sin(direction) * speed;
+
+    dartboardX += 10;
 
     // Prevent the dartboard from going out of bounds
-
     // Currently magic numbers, figure out how to use variables for this.
     if (dartboardX + dartboardW > 700){
         dartboardX = 700 - dartboardW;
@@ -237,11 +230,29 @@ function moveDartboard(event) {
     }
 
 
-    drawDartboard();
+    draw();
 }
 
-canvas.addEventListener('click', handleClick);
-document.addEventListener('keydown', moveDartboard);
 
+
+function update(){
+        moveDartboard();
+        handleClick();
+    
+        draw();
+        requestAnimationFrame(update);
+}
+
+// NO CLUE HOW THIS IS WORKING BUT IT WORKS!
+function gameloop(){
+    update();
+}
+
+
+
+setInterval(update, 16);
 // Initialize game
-dartboardImage.onload = () => drawDartboard();
+dartboardImage.onload = () => {
+    draw();
+    gameloop();
+};
