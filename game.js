@@ -209,10 +209,10 @@ function handleClick(event) {
 // Move dartboard with arrow keys
 function moveDartboard(event) {
 
-    //dartboardX += Math.cos(direction) * speed;
-    //dartboardY += Math.sin(direction) * speed;
+    dartboardX += Math.cos(direction) * speed;
+    dartboardY += Math.sin(direction) * speed;
 
-    dartboardX += 10;
+    direction += 0.05;
 
     // Prevent the dartboard from going out of bounds
     // Currently magic numbers, figure out how to use variables for this.
@@ -236,16 +236,17 @@ function moveDartboard(event) {
 
 
 function update(){
-        moveDartboard();
-        handleClick();
+    moveDartboard();
+    handleClick();
     
-        draw();
-        requestAnimationFrame(update);
+    draw();
+        
 }
 
 // NO CLUE HOW THIS IS WORKING BUT IT WORKS!
 function gameloop(){
     update();
+    requestAnimationFrame(update);
 }
 
 
