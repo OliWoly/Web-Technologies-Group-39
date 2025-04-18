@@ -72,12 +72,12 @@ canvas {
     flex-direction: row;
 }
 
-#scoreTitle, #roundScoreTitle, #shotsLeftTitle{
+#scoreTitle, #roundScoreTitle, #shotsLeftTitle, #initialTitle{
     font-family: rodfat;
     color:#2f354d;
 }
 
-#score, #roundScore, #shotsLeft{
+#score, #roundScore, #shotsLeft, #initial{
     font-family: rodfat;
     color:#2f354d;
 }

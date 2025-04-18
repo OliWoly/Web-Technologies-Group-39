@@ -25,6 +25,11 @@ canvas.addEventListener('click', handleClick);
         resetButton = false;
         var resetButtonElement = document.getElementById('resetBtn');
         resetButtonElement.addEventListener("click", resetRoundScore);
+
+        // Initial
+        var initialButtonElement = document.getElementById('initialBtn');
+        initialButtonElement.addEventListener("click", changeInitial);
+        var initial = "";
     }
 
     // Game
@@ -32,7 +37,6 @@ canvas.addEventListener('click', handleClick);
         // Set initial position for dartboard
         // for all intents and purposes, use width as diameter..
         // since its a circle it will stay the same no matter what, no adjustments should be made.
-        var initial = "OK";
         var roundNumber = 1;
         
         var dartboardW = 300;
@@ -50,21 +54,42 @@ canvas.addEventListener('click', handleClick);
 
     // Sound Effects
     {
-        var missSFX = new Audio ("miss.wav");
-        var shoot1xSFX = new Audio("shoot1.wav");
-        var shoot2xSFX = new Audio("shoot2.wav");
-        var shoot3xSFX = new Audio("shoot3.wav");
-        var bullseyeSFX = new Audio ("bullseye.wav");
-        var resetSFX = new Audio("reset.wav");
-       
-        var dartboardBounceSFX = new Audio("bounce.wav")
+        // Have to be seperate functions instead of playing a predefined variable
+        // this allows them to overlapo each other without stopping the current one from playing.
 
+        function playMiss() {
+            new Audio("miss.wav").play();
+        }
+
+        function playShoot1() {
+            new Audio("shoot1.wav").play();
+        }
+        
+        function playShoot2x() {
+            new Audio("shoot2.wav").play();
+        }
+        
+        function playShoot3x() {
+            new Audio("shoot3.wav").play();
+        }
+        
+        function playBullseye() {
+            new Audio("bullseye.wav").play();
+        }
+        
+        function playReset() {
+            new Audio("reset.wav").play();
+        }
+        
+        function playDartboardBounce() {
+            new Audio("bounce.wav").play();
+        }
     }
 
     // Leaderboard
     {
         // Will save Each round.
-        // [initial, score, round, time]
+        // [initial, score, round, shotsleft, time]
         var rounds = [
             []
         ]
@@ -285,7 +310,7 @@ function handleClick(event) {
     const dartboardCenterX = dartboardX + (dartboardW/2);
     const dartboardCenterY = dartboardY + (dartboardH/2);
 
-    shoot1xSFX.play();
+    playShoot1();
     calculateScore(x, y, dartboardCenterX, dartboardCenterY);
     // Count Shots
     shotsLeftInternal -= 1;
@@ -357,7 +382,7 @@ function convertShotsLeftElement(){
 
 function resetRoundScore(){
     // Play Sound
-    resetSFX.play();
+    playReset();
 
     // Add current stats to leaderboard.
     addLeaderboardEntry(initial, roundScore, roundNumber);
@@ -382,8 +407,17 @@ function addScoreToRoundScore(scoreToAdd){
 
 function addLeaderboardEntry(initial, score, round){
     const now = new Date();
-    const time = now.toTimeString().slice(0, 5); 
+    const time = now.toTimeString().slice(0, 8); 
     rounds.push([initial, score, round, shotsLeftInternal, time]);
+}
+
+function changeInitial(){
+    initial = prompt("Enter Your Initial");
+    applyInitial();
+}
+
+function applyInitial(){
+    initialButtonElement.textContent = initial;
 }
 
 
