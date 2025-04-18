@@ -33,6 +33,9 @@ https://oliwoly.github.io/Web-Technologies-Group-39/
 Keeping it simple by not using any javascript frameworks, a simple game like this does not require any and it would make it much more complicated.
 
 ## References
-Angle calculations
+Angle calculations:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2
+
 https://stackoverflow.com/questions/1955687/best-way-for-simple-game-loop-in-javascript
+
+https://coolors.co/a31621-fcf7f8-ced3dc-439775-2a4747

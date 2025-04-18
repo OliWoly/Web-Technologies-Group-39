@@ -1,12 +1,23 @@
 const canvas = document.getElementById('dartboard');
 const ctx = canvas.getContext('2d');
-const scoreElement = document.getElementById('score');
-let score = 0;
-
 canvas.addEventListener('click', handleClick);
 
+
+// Value Initialisation
+// Total score achieved.
+let score = 0;
+const scoreElement = document.getElementById('score');
+
+// Numerical representation of the shots left. Will be later converted to a visual representation with a function.
+let shotsLeftInternal = 3;
+const shotsLeftElement = document.getElementById('shotsLeft');
+
+// Score only in the current round.
+let roundScore = 0;
+const roundScoreElement = document.getElementById('roundScore');
+
 // Set initial position for dartboard
-// for or intents and purposes, use width as diameter..
+// for all intents and purposes, use width as diameter..
 // since its a circle it will stay the same no matter what, no adjustments should be made.
 let dartboardW = 300;
 let dartboardH = 300;
@@ -204,6 +215,9 @@ function handleClick(event) {
     const dartboardCenterY = dartboardY + (dartboardH/2);
 
     calculateScore(x, y, dartboardCenterX, dartboardCenterY);
+    // Count Shots
+    shotsLeftInternal -= 1;
+    convertShotsLeftElement();
 }
 
 function bounceOfWall(isVertical) {
@@ -224,7 +238,7 @@ function bounceOfWall(isVertical) {
 
 
 // Move dartboard with arrow keys
-function moveDartboard() {
+function bounceDartboard() {
     dartboardX += Math.cos(direction * Math.PI / 180) * speed;
     dartboardY += Math.sin(direction * Math.PI / 180) * speed;
 
@@ -253,17 +267,35 @@ function moveDartboard() {
     draw();
 }
 
-
-
-
-function update(){
-    moveDartboard();
-    handleClick();
-    
-    draw();
-        
+function convertShotsLeftElement(){
+    if (shotsLeftInternal == 3){
+        shotsLeftElement.textContent = "X X X";
+    }
+    if (shotsLeftInternal == 2){
+        shotsLeftElement.textContent = "X X";
+    }
+    if (shotsLeftInternal == 1){
+        shotsLeftElement.textContent = "X";
+    }
+    if (shotsLeftInternal == 0){
+        shotsLeftElement.textContent = "";
+    }
 }
 
+
+
+
+// Function for game running.
+// main function
+function update(){
+    bounceDartboard();
+    handleClick();
+    draw();
+}   
+
+
+// DO NOT TOUCH BENEATH
+{
 // NO CLUE HOW THIS IS WORKING BUT IT WORKS!
 function gameloop(){
     update();
@@ -277,4 +309,5 @@ setInterval(update, 16);
 dartboardImage.onload = () => {
     draw();
     gameloop();
+}
 };
