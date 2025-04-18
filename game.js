@@ -4,32 +4,45 @@ canvas.addEventListener('click', handleClick);
 
 
 // Value Initialisation
-// Total score achieved.
-let score = 0;
-const scoreElement = document.getElementById('score');
+{
+    // UI
+    {
+        // Total score achieved.
+        var score = 0;
+        var scoreElement = document.getElementById('score');
 
-// Numerical representation of the shots left. Will be later converted to a visual representation with a function.
-let shotsLeftInternal = 3;
-const shotsLeftElement = document.getElementById('shotsLeft');
+        // Numerical representation of the shots left. Will be later converted to a visual representation with a function.
+        var shotsLeftInternal = 3;
+        var shotsLeftElement = document.getElementById('shotsLeft');
 
-// Score only in the current round.
-let roundScore = 0;
-const roundScoreElement = document.getElementById('roundScore');
+        // Score only in the current round.
+        var roundScore = 0;
+        var roundScoreElement = document.getElementById('roundScore');
 
-// Set initial position for dartboard
-// for all intents and purposes, use width as diameter..
-// since its a circle it will stay the same no matter what, no adjustments should be made.
-let dartboardW = 300;
-let dartboardH = 300;
-let speed = 7;
-let direction = 30;
+        // Reset Button
+        resetButton = false;
+        var resetButtonElement = document.getElementById('resetBtn');
+        resetButtonElement.addEventListener("click", resetRoundScore);
+    }
 
-let dartboardX = (canvas.width / 2) - (dartboardW/2);  // Adjust based on image size
-let dartboardY = (canvas.height / 2) - (dartboardH/2); 
+    // Game
+    {
+        // Set initial position for dartboard
+        // for all intents and purposes, use width as diameter..
+        // since its a circle it will stay the same no matter what, no adjustments should be made.
+        var dartboardW = 300;
+        var dartboardH = 300;
+        var speed = 7;
+        var direction = 30;
 
-// Load dartboard image
-const dartboardImage = new Image();
-dartboardImage.src = 'dartboard.png';
+        var dartboardX = (canvas.width / 2) - (dartboardW/2);  // Adjust based on image size
+        var dartboardY = (canvas.height / 2) - (dartboardH/2); 
+
+        // Load dartboard image
+        var dartboardImage = new Image();
+        dartboardImage.src = 'dartboard.png';
+    }
+}
 
 // Changes the colour of the score text to red breifly when scoring
 function changeScoreColourOnScore(colour) {
@@ -68,7 +81,7 @@ function calculateScore(x, y, dartboardCenterX, dartboardCenterY) {
     //                         -90°
 
     // Still a total range of 360°. 
-    // Might change to constant offset so that top is 0° and circles to 360 rather than 180.
+    // **Might change to constant offset so that top is 0° and circles to 360 rather than 180.
 
     // Offset with the location of the dartboard.
     // converts from radians to °.
@@ -79,7 +92,7 @@ function calculateScore(x, y, dartboardCenterX, dartboardCenterY) {
     // Each scoring "zone" is 1/20th of the board.
     // 360/20 = 18°
     // First "zone" - 20, is centered meaning its not 90 + 18, its:
-    // 90 - 9, 90 + 9, total angle = 18°.
+    // 90 - 9, 90 + 9, total angle = 18°. (81-99)
 
     // angle based
     base = 0;
@@ -192,7 +205,9 @@ function calculateScore(x, y, dartboardCenterX, dartboardCenterY) {
     }
     
     // Calculate score with given variables.
-    score += base * mult
+    score += base * mult;
+    roundScore += base * mult;
+
     // Flash if scored
     if (mult > 0){
         changeScoreColourOnScore([255, 0, 0]);
@@ -202,6 +217,8 @@ function calculateScore(x, y, dartboardCenterX, dartboardCenterY) {
     }
 
     scoreElement.textContent = score;
+    roundScoreElement.textContent = roundScore;
+
     
 }
 
@@ -218,6 +235,7 @@ function handleClick(event) {
     // Count Shots
     shotsLeftInternal -= 1;
     convertShotsLeftElement();
+    //resetRoundScore();
 }
 
 function bounceOfWall(isVertical) {
@@ -267,6 +285,7 @@ function bounceDartboard() {
     draw();
 }
 
+// Converts internal value of shots left into a visual representation
 function convertShotsLeftElement(){
     if (shotsLeftInternal == 3){
         shotsLeftElement.textContent = "X X X";
@@ -280,6 +299,13 @@ function convertShotsLeftElement(){
     if (shotsLeftInternal == 0){
         shotsLeftElement.textContent = "";
     }
+}
+
+function resetRoundScore(){
+    shotsLeftInternal = 3;
+    roundScoreElement.textContent = 0;
+    roundScore = 0;
+    convertShotsLeftElement();
 }
 
 

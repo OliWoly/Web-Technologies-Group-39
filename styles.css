@@ -66,8 +66,8 @@ canvas {
     font-family: rodfat;
 }
 
-/* SCORE */
-#scorediv{
+/* UI */
+#uiValues{
     flex:left;
     flex-direction: row;
 }
