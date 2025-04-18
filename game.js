@@ -10,6 +10,7 @@ canvas.addEventListener('click', handleClick);
         // Total score achieved.
         var score = 0;
         var scoreElement = document.getElementById('score');
+        var scoreColour = [0, 0, 0];
 
         // Numerical representation of the shots left. Will be later converted to a visual representation with a function.
         var shotsLeftInternal = 3;
@@ -18,6 +19,7 @@ canvas.addEventListener('click', handleClick);
         // Score only in the current round.
         var roundScore = 0;
         var roundScoreElement = document.getElementById('roundScore');
+        var roundScoreColour = [0, 0, 0];
 
         // Reset Button
         resetButton = false;
@@ -42,30 +44,53 @@ canvas.addEventListener('click', handleClick);
         var dartboardImage = new Image();
         dartboardImage.src = 'dartboard.png';
     }
+
+    // Sound Effects
+    {
+        //var shootSFX = audio("reset.wav")
+    }
 }
 
 // Changes the colour of the score text to red breifly when scoring
-function changeScoreColourOnScore(colour) {
-    let initial = colour;
-    let final = [...initial];
-    let steps = 30;
-    let stepSize = 255 / steps;
-    let currentStep = 0;
-
-    function updateColor() {
-        if (currentStep >= steps) {
-            return; // Stop if done
-        }
-
-        final[0] -= stepSize;
-        final[0] = Math.max(final[0], 0);
-        scoreElement.style.color = `rgb(${Math.round(final[0])}, ${final[1]}, ${final[2]})`;
-
-        currentStep++;
-        requestAnimationFrame(updateColor);
-    }
-    requestAnimationFrame(updateColor);
+function changeScoreColour(colour) {
+    // Change to red
+    scoreColour = colour;
+    colourString = "rgb(" + scoreColour.toString() + ")";
+    scoreElement.style.color = colourString;
 }
+
+function changeRoundScoreColour(colour) {
+    // Change to red
+    roundScoreColour = colour;
+    colourString = "rgb(" + roundScoreColour.toString() + ")";
+    roundScoreElement.style.color = colourString;
+}
+
+function fadeColourToBlack(color){
+    color[0] -= 10;
+    if (color[0] < 0){
+        color[0] = 0;
+    }
+
+    color[1] -= 10;
+    if (color[1] < 0){
+        color[1] = 0;
+    }
+
+    color[2] -= 10;
+    if (color[2] < 0){
+        color[2] = 0;
+    }
+}
+
+function applyScoreColour(){
+    colourString = "rgb(" + scoreColour.toString() + ")";
+    scoreElement.style.color = colourString;
+
+    colourString = "rgb(" + roundScoreColour.toString() + ")";
+    roundScoreElement.style.color = colourString;
+}
+
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -206,19 +231,28 @@ function calculateScore(x, y, dartboardCenterX, dartboardCenterY) {
     
     // Calculate score with given variables.
     score += base * mult;
-    roundScore += base * mult;
+    roundScoreToAdd = base * mult;
 
     // Flash if scored
     if (mult > 0){
-        changeScoreColourOnScore([255, 0, 0]);
+        changeScoreColour([255, 0, 0]);
+
+
+        if (shotsLeftInternal > 0){
+            changeRoundScoreColour([255, 0, 0]);
+        }
+        else {
+            changeRoundScoreColour([255, 255, 255]);
+        }
     }
     else {
-        changeScoreColourOnScore([255, 255, 255]);
+        changeScoreColour([255, 255, 255]);
+        changeRoundScoreColour([255, 255, 255]);
     }
 
+    // Add to total score.
     scoreElement.textContent = score;
-    roundScoreElement.textContent = roundScore;
-
+    addScoreToRoundScore(roundScoreToAdd);
     
 }
 
@@ -235,7 +269,6 @@ function handleClick(event) {
     // Count Shots
     shotsLeftInternal -= 1;
     convertShotsLeftElement();
-    //resetRoundScore();
 }
 
 function bounceOfWall(isVertical) {
@@ -308,6 +341,14 @@ function resetRoundScore(){
     convertShotsLeftElement();
 }
 
+// Adds scored score to roundScore only if shotsLeft is more than 0.
+function addScoreToRoundScore(scoreToAdd){
+    if (shotsLeftInternal > 0){
+        roundScore += scoreToAdd;
+        roundScoreElement.textContent = roundScore;
+    }
+    
+}
 
 
 
@@ -315,7 +356,10 @@ function resetRoundScore(){
 // main function
 function update(){
     bounceDartboard();
-    handleClick();
+    fadeColourToBlack(scoreColour);
+    fadeColourToBlack(roundScoreColour);
+    applyScoreColour();
+
     draw();
 }   
 
