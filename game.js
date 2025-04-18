@@ -32,6 +32,9 @@ canvas.addEventListener('click', handleClick);
         // Set initial position for dartboard
         // for all intents and purposes, use width as diameter..
         // since its a circle it will stay the same no matter what, no adjustments should be made.
+        var initial = "OK";
+        var roundNumber = 1;
+        
         var dartboardW = 300;
         var dartboardH = 300;
         var speed = 7;
@@ -47,7 +50,24 @@ canvas.addEventListener('click', handleClick);
 
     // Sound Effects
     {
-        //var shootSFX = audio("reset.wav")
+        var missSFX = new Audio ("miss.wav");
+        var shoot1xSFX = new Audio("shoot1.wav");
+        var shoot2xSFX = new Audio("shoot2.wav");
+        var shoot3xSFX = new Audio("shoot3.wav");
+        var bullseyeSFX = new Audio ("bullseye.wav");
+        var resetSFX = new Audio("reset.wav");
+       
+        var dartboardBounceSFX = new Audio("bounce.wav")
+
+    }
+
+    // Leaderboard
+    {
+        // Will save Each round.
+        // [initial, score, round, time]
+        var rounds = [
+            []
+        ]
     }
 }
 
@@ -265,6 +285,7 @@ function handleClick(event) {
     const dartboardCenterX = dartboardX + (dartboardW/2);
     const dartboardCenterY = dartboardY + (dartboardH/2);
 
+    shoot1xSFX.play();
     calculateScore(x, y, dartboardCenterX, dartboardCenterY);
     // Count Shots
     shotsLeftInternal -= 1;
@@ -335,10 +356,19 @@ function convertShotsLeftElement(){
 }
 
 function resetRoundScore(){
+    // Play Sound
+    resetSFX.play();
+
+    // Add current stats to leaderboard.
+    addLeaderboardEntry(initial, roundScore, roundNumber);
+
+    roundNumber += 1;
     shotsLeftInternal = 3;
     roundScoreElement.textContent = 0;
     roundScore = 0;
     convertShotsLeftElement();
+
+    console.log(rounds);
 }
 
 // Adds scored score to roundScore only if shotsLeft is more than 0.
@@ -348,6 +378,12 @@ function addScoreToRoundScore(scoreToAdd){
         roundScoreElement.textContent = roundScore;
     }
     
+}
+
+function addLeaderboardEntry(initial, score, round){
+    const now = new Date();
+    const time = now.toTimeString().slice(0, 5); 
+    rounds.push([initial, score, round, shotsLeftInternal, time]);
 }
 
 
