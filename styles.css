@@ -143,7 +143,6 @@ canvas {
     .stats {
         flex-direction: column;
     }
-}
 
 @font-face {
     font-family: rodfat;

@@ -17,15 +17,15 @@ https://oliwoly.github.io/Web-Technologies-Group-39/
 
 ## Game Features
 - Display dartboard
-    - Make it move
+    - Make it move ✅
     - Make the point scoring accurate ✅
         - Flash most recent score
         - Flash score when scored ✅
     - Make it the correct size ✅
 
 - Add rounds
-    - Add only three shots per round
-    - Count scoring total
+    - Add only three shots per round ✅
+    - Count scoring total ✅
 
 - Make look nice 
 
@@ -33,6 +33,14 @@ https://oliwoly.github.io/Web-Technologies-Group-39/
 Keeping it simple by not using any javascript frameworks, a simple game like this does not require any and it would make it much more complicated.
 
 ## References
-Angle calculations
+Angle calculations:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2
+
+Game Loop logic - for game to actually work:
 https://stackoverflow.com/questions/1955687/best-way-for-simple-game-loop-in-javascript
+
+Colour Choices:
+https://coolors.co/a31621-fcf7f8-ced3dc-439775-2a4747
+
+Sound Effects:
+https://sfxr.me/
