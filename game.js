@@ -61,7 +61,7 @@ canvas.addEventListener('click', handleClick);
         const dart2Image = new Image(32, 16);
         dart2Image.src = 'dart.512x256.png';
 
-        const dart4Image = new Image(48, 16);
+        const dart3Image = new Image(48, 16);
         dart3Image.src = 'dart.768x256.png';
     }
 
