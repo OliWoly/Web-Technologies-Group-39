@@ -381,10 +381,10 @@ function bounceDartboard() {
 function convertShotsLeftElement(){
     if (shotsLeftInternal == 3){
         //shotsLeftElement.textContent = "X X X";
-        document.getElementById("shotsLeft").replaceWith(dart3Image);
+        document.getElementById("shotsLeft").appendChild(dart3Image);
     }
     if (shotsLeftInternal == 2){
-        document.getElementById("shotsLeft").appendChild(dart2Image);
+        document.getElementById("shotsLeft").replaceWith(dart2Image);
     }
     if (shotsLeftInternal == 1){
         document.getElementById("shotsLeft").appendChild(dart1Image);
