@@ -3,20 +3,106 @@
     <title>DARTS</title>
     <link rel="stylesheet" href="styles.css" type="text/css"/>
 </head>
+<footer>
+    <div class="footer-content">
+        <p>&copy; 2023 DARTS Game | Team: 
+            <span class="team-names">Oliwier Kulczycki, Abdullah Haider, [Team Member 2]</span>
+        </p>
+    </div>
+</footer>
 <body>
     <!-- Navigation bar --> 
     <div class="navMain">
 		<div class="navObj"><a href="index.html">Home</a></div>
-		<div class="navObj"><a href="game.html">Game</div>
+		<div class="navObj"><a href="game.html">Game</a></div>
 		<div class="navObj"><a href="scores.html">Scores</a></div>
 		<div class="navObj"><a href="rules.html">Rules</a></div>
     </div>
     <main>
-        <div>
-            <h1>Rules Page</h1>
-            <p>
-                The rules are simple.
-            </p>
+        <div class="rules-hero">
+            <h1><i class="fas fa-book-open"></i> Game Rules</h1>
+            <p>Master the dartboard to become a champion!</p>
+        </div>
+    
+        <div class="rules-accordion">
+            <!-- Scoring Section -->
+            <div class="rule-card">
+                <button class="rule-header">
+                    <i class="fas fa-bullseye"></i>
+                    <h2>Scoring System</h2>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="rule-content">
+                    <div class="scoring-grid">
+                        <div class="scoring-item">
+                            <div class="score-circle bullseye">50</div>
+                            <p>Bullseye (Center Red)</p>
+                        </div>
+                        <div class="scoring-item">
+                            <div class="score-circle outer-bull">25</div>
+                            <p>Outer Bull (Green)</p>
+                        </div>
+                        <div class="scoring-item">
+                            <div class="score-circle triple">3×</div>
+                            <p>Triple Ring</p>
+                        </div>
+                        <div class="scoring-item">
+                            <div class="score-circle double">2×</div>
+                            <p>Double Ring</p>
+                        </div>
+                    </div>
+                    <p class="note">Hitting the thin outer ring doubles the segment score, while the thin inner ring triples it.</p>
+                </div>
+            </div>
+    
+            <!-- Gameplay Section -->
+            <div class="rule-card">
+                <button class="rule-header">
+                    <i class="fas fa-gamepad"></i>
+                    <h2>Basic Gameplay</h2>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="rule-content">
+                    <ol class="steps-list">
+                        <li>Each player gets 3 darts per turn</li>
+                        <li>Aim for high-value segments (20, 19, 18)</li>
+                        <li>Score subtracts from starting total (usually 501)</li>
+                        <li>First to reach exactly 0 wins</li>
+                        <li>Must finish on a double (outer ring)</li>
+                    </ol>
+                    <img src="images/dartboard-zones.png" alt="Dartboard Zones" class="rule-image">
+                </div>
+            </div>
+    
+            <!-- Controls Section -->
+            <div class="rule-card">
+                <button class="rule-header">
+                    <i class="fas fa-mouse-pointer"></i>
+                    <h2>Controls</h2>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="rule-content">
+                    <div class="controls-grid">
+                        <div class="control-item">
+                            <div class="key-icon"><i class="fas fa-mouse"></i></div>
+                            <p><strong>Click</strong> to throw dart</p>
+                        </div>
+                        <div class="control-item">
+                            <div class="key-icon"><i class="fas fa-arrows-alt"></i></div>
+                            <p>Dartboard moves automatically</p>
+                        </div>
+                        <div class="control-item">
+                            <div class="key-icon"><i class="fas fa-sync-alt"></i></div>
+                            <p>Refresh page to reset game</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="quick-ref">
+            <h3><i class="fas fa-lightbulb"></i> Pro Tip</h3>
+            <p>For 501 games, aim for triple 20 (60 points) to reduce your score fastest. Finish with double 16 (32) or double 8 (16).</p>
         </div>
     </main>
 </body>
