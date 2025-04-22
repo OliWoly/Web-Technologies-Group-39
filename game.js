@@ -454,22 +454,6 @@ function update(){
     draw();
 }   
 
-
-// DO NOT TOUCH BENEATH
-{
-// NO CLUE HOW THIS IS WORKING BUT IT WORKS!
-setInterval(update, 16);
-function main(){
-    update();
-}
-
-// Initialize game
-dartboardImage.onload = () => {
-    applyInitial();
-    draw();
-    main();
-}
-};
 function calculateScore() {
     // Add these lines where score updates:
     scoreElement.classList.add('score-pop');
@@ -485,3 +469,19 @@ function calculateScore() {
         ctx.fill();
     }
 }
+// DO NOT TOUCH BENEATH
+{
+// NO CLUE HOW THIS IS WORKING BUT IT WORKS!
+setInterval(update, 16);
+function main(){
+    update();
+}
+
+// Initialize game
+dartboardImage.onload = () => {
+    applyInitial();
+    draw();
+    main();
+}
+};
+
