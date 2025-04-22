@@ -52,6 +52,19 @@ canvas.addEventListener('click', handleClick);
         dartboardImage.src = 'dartboard.png';
     }
 
+    // Dart Image
+    {
+        // Create an imagine to use as the shots left indicator
+        const dart1Image = new Image(16, 16);
+        dart1Image.src = 'dart.256x256.png';
+
+        const dart2Image = new Image(32, 16);
+        dart2Image.src = 'dart.512x256.png';
+
+        const dart4Image = new Image(48, 16);
+        dart3Image.src = 'dart.768x256.png';
+    }
+
     // Sound Effects
     {
         // Have to be seperate functions instead of playing a predefined variable
