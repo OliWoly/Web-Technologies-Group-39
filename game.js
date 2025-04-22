@@ -30,6 +30,7 @@ canvas.addEventListener('click', handleClick);
         var initialButtonElement = document.getElementById('initialBtn');
         initialButtonElement.addEventListener("click", changeInitial);
         var initial = "";
+        var initialButtonText = "Initial: ";
     }
 
     // Game
@@ -109,16 +110,14 @@ canvas.addEventListener('click', handleClick);
     }
 }
 
-// Changes the colour of the score text to red breifly when scoring
+// Changes the colour of the score text breifly when scoring
 function changeScoreColour(colour) {
-    // Change to red
     scoreColour = colour;
     colourString = "rgb(" + scoreColour.toString() + ")";
     scoreElement.style.color = colourString;
 }
 
 function changeRoundScoreColour(colour) {
-    // Change to red
     roundScoreColour = colour;
     colourString = "rgb(" + roundScoreColour.toString() + ")";
     roundScoreElement.style.color = colourString;
@@ -346,8 +345,6 @@ function bounceOfWall(isVertical) {
     }
 }
 
-
-// Move dartboard with arrow keys
 function bounceDartboard() {
     dartboardX += Math.cos(direction * Math.PI / 180) * speed;
     dartboardY += Math.sin(direction * Math.PI / 180) * speed;
@@ -433,7 +430,8 @@ function changeInitial(){
 }
 
 function applyInitial(){
-    initialButtonElement.textContent = initial;
+    initialButtonText = "Initial: " + initial;
+    initialButtonElement.textContent = initialButtonText
 }
 
 
@@ -463,6 +461,7 @@ function gameloop(){
 setInterval(update, 16);
 // Initialize game
 dartboardImage.onload = () => {
+    applyInitial();
     draw();
     gameloop();
 }
