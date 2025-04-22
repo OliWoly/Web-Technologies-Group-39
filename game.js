@@ -454,7 +454,21 @@ function update(){
     draw();
 }   
 
-
+//function calculateScore() {
+    // Add these lines where score updates:
+//    scoreElement.classList.add('score-pop');
+//    setTimeout(() => {
+//        scoreElement.classList.remove('score-pop');
+//    }, 300);
+    
+    // Add hit effect
+ //   if (mult > 0) {
+ //       ctx.fillStyle = 'rgba(0, 255, 0, 0.3)';
+ //       ctx.beginPath();
+ //       ctx.arc(x, y, 20, 0, Math.PI * 2);
+ //       ctx.fill();
+ //   }
+//}
 // DO NOT TOUCH BENEATH
 {
 // NO CLUE HOW THIS IS WORKING BUT IT WORKS!
@@ -470,18 +484,4 @@ dartboardImage.onload = () => {
     main();
 }
 };
-function calculateScore() {
-    // Add these lines where score updates:
-    scoreElement.classList.add('score-pop');
-    setTimeout(() => {
-        scoreElement.classList.remove('score-pop');
-    }, 300);
-    
-    // Add hit effect
-    if (mult > 0) {
-        ctx.fillStyle = 'rgba(0, 255, 0, 0.3)';
-        ctx.beginPath();
-        ctx.arc(x, y, 20, 0, Math.PI * 2);
-        ctx.fill();
-    }
-}
+
