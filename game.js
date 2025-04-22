@@ -380,13 +380,15 @@ function bounceDartboard() {
 // Converts internal value of shots left into a visual representation
 function convertShotsLeftElement(){
     if (shotsLeftInternal == 3){
-        //shotsLeftElement.textContent = "X X X";
+        shotsLeftElement.textContent = "";
         document.getElementById("shotsLeft").appendChild(dart3Image);
     }
     if (shotsLeftInternal == 2){
-        document.getElementById("shotsLeft").replaceWith(dart2Image);
+        shotsLeftElement.textContent = "";
+        document.getElementById("shotsLeft").appendChild(dart2Image);
     }
     if (shotsLeftInternal == 1){
+        shotsLeftElement.textContent = "";
         document.getElementById("shotsLeft").appendChild(dart1Image);
     }
     if (shotsLeftInternal == 0){
