@@ -107,6 +107,9 @@ canvas.addEventListener('click', handleClick);
         var rounds = [
             []
         ]
+
+        var leaderboardButtonElement = document.getElementById("leaderboardBtn");
+        leaderboardButtonElement.addEventListener("click", sendScoresToLocalStorage);
     }
 }
 
@@ -424,6 +427,10 @@ function addLeaderboardEntry(initial, score, round){
     rounds.push([initial, score, round, shotsLeftInternal, time]);
 }
 
+function sendScoresToLocalStorage(){
+    localStorage.setItem("Leaderboard", JSON.stringify(rounds));
+}
+
 function changeInitial(){
     initial = prompt("Enter Your Initial");
     applyInitial();
@@ -451,18 +458,15 @@ function update(){
 // DO NOT TOUCH BENEATH
 {
 // NO CLUE HOW THIS IS WORKING BUT IT WORKS!
-function gameloop(){
+setInterval(update, 16);
+function main(){
     update();
-    requestAnimationFrame(update);
 }
 
-
-
-setInterval(update, 16);
 // Initialize game
 dartboardImage.onload = () => {
     applyInitial();
     draw();
-    gameloop();
+    main();
 }
 };

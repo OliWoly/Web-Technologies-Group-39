@@ -12,12 +12,33 @@
 		<div class="navObj"><a href="rules.html">Rules</a></div>
     </div>
     <main>
+        
         <div>
             <h1>Scores Page</h1>
             <p>
                 Current top scores:
             </p>
         </div>
+
+        <div class="leaderboardDiv">
+            <h2>Leaderboard</h2>
+            <table id="leaderboardTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Score</th>
+                        <th>Round</th>
+                        <th>Shots Left</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+        
     </main>
+    <script src="leaderboard.js"></script>
 </body>
 </html>
