@@ -384,12 +384,10 @@ function convertShotsLeftElement(){
         document.getElementById("shotsLeft").appendChild(dart3Image);
     }
     if (shotsLeftInternal == 2){
-        shotsLeftElement.textContent = "X X";
-        //document.getElementById("shotsLeft").replaceWith(dart2Image);
+        document.getElementById("shotsLeft").appendChild(dart2Image);
     }
     if (shotsLeftInternal == 1){
-        shotsLeftElement.textContent = "X";
-        //document.getElementById("shotsLeft").replaceWith(dart1Image);
+        document.getElementById("shotsLeft").appendChild(dart1Image);
     }
     if (shotsLeftInternal == 0){
         shotsLeftElement.textContent = "";
