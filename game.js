@@ -55,13 +55,13 @@ canvas.addEventListener('click', handleClick);
     // Dart Image
     {
         // Create an imagine to use as the shots left indicator
-        const dart1Image = new Image(16, 16);
+        var dart1Image = new Image(16, 16);
         dart1Image.src = 'dart.256x256.png';
 
-        const dart2Image = new Image(32, 16);
+        var dart2Image = new Image(32, 16);
         dart2Image.src = 'dart.512x256.png';
 
-        const dart3Image = new Image(48, 16);
+        var dart3Image = new Image(48, 16);
         dart3Image.src = 'dart.768x256.png';
     }
 
@@ -381,7 +381,7 @@ function bounceDartboard() {
 function convertShotsLeftElement(){
     if (shotsLeftInternal == 3){
         //shotsLeftElement.textContent = "X X X";
-        document.getElementById("shotsLeft").replaceWith(dart3Image);
+        document.getElementById("shotsLeft").appendChild(dart3Image);
     }
     if (shotsLeftInternal == 2){
         shotsLeftElement.textContent = "X X";
