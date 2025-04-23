@@ -83,17 +83,9 @@ startGameElement.addEventListener('click', startGame)
         function playShoot1() {
             new Audio("shoot1.wav").play();
         }
-        
-        function playShoot2x() {
-            new Audio("shoot2.wav").play();
-        }
-        
-        function playShoot3x() {
-            new Audio("shoot3.wav").play();
-        }
-        
-        function playBullseye() {
-            new Audio("bullseye.wav").play();
+
+        function playSendScores() {
+            new Audio("sendScores.wav").play();
         }
         
         function playReset() {
@@ -301,7 +293,7 @@ function calculateScore(x, y, dartboardCenterX, dartboardCenterY) {
     // Flash if scored
     if (mult > 0){
         changeScoreColour([255, 0, 0]);
-
+        playShoot1();
 
         if (shotsLeftInternal > 0){
             changeRoundScoreColour([255, 0, 0]);
@@ -313,6 +305,7 @@ function calculateScore(x, y, dartboardCenterX, dartboardCenterY) {
     else {
         changeScoreColour([255, 255, 255]);
         changeRoundScoreColour([255, 255, 255]);
+        playMiss();
     }
 
     // Add to total score.
@@ -330,7 +323,6 @@ function handleClick(event) {
     const dartboardCenterX = dartboardX + (dartboardW/2);
     const dartboardCenterY = dartboardY + (dartboardH/2);
 
-    playShoot1();
     calculateScore(x, y, dartboardCenterX, dartboardCenterY);
     // Count Shots
     shotsLeftInternal -= 1;
@@ -434,6 +426,7 @@ function addLeaderboardEntry(initial, score, round){
 }
 
 function sendScoresToLocalStorage(){
+    playSendScores();
     localStorage.setItem("Leaderboard", JSON.stringify(rounds));
 }
 
