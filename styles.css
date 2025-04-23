@@ -528,7 +528,7 @@ footer {
     background-color: #2A4747;
     padding:1em;
     text-align: center;
-    color:#C0C0C0;
+    color:white;
     font-family: rodfat;
 
 }
@@ -542,10 +542,20 @@ footer {
     width: 5em;
 }
 
-.leaderboardTitle {
-    color:#2f354d;
+.lTableHead {
+    background-color: #CED3DC;
+    color: #2A4747;
     font-family: rodfat;
-    background-color: white;
+    font-size: 2eml;
+    padding:0.5em;
+    height:2.2em; 
+    width:5em;
+}
+
+.leaderboardTitle {
+    color:white;
+    font-family: rodfat;
+    background-color: #2A4747;
     border-radius: 0.5em;
     text-align:center;
     width:auto;
