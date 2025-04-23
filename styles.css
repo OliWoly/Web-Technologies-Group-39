@@ -667,6 +667,21 @@ footer {
     width:fit-content;
     font-family: rodfat;
 }
+
+#startGame {
+    font-family:rodfat;
+    position: absolute;
+    transform: translate(0, 320%);
+    padding: 1em;
+    font-size: 2em;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #2A4747;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
   
 #initialBtn:hover {
     background-color: #2980b9; /* darker blue on hover */

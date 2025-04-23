@@ -2,6 +2,11 @@ const canvas = document.getElementById('dartboard');
 const ctx = canvas.getContext('2d');
 canvas.addEventListener('click', handleClick);
 
+var startGameElement = document.getElementById('startGame');
+startGameElement.addEventListener('click', startGame)
+
+
+
 
 // Value Initialisation
 {
@@ -333,6 +338,7 @@ function handleClick(event) {
 }
 
 function bounceOfWall(isVertical) {
+    playDartboardBounce();
     if (isVertical) {
         direction = 180 - direction; // Reflect angle horizontally
     } else {
@@ -441,10 +447,7 @@ function applyInitial(){
     initialButtonElement.textContent = initialButtonText
 }
 
-
-
 // Function for game running.
-// main function
 function update(){
     bounceDartboard();
     fadeColourToBlack(scoreColour);
@@ -453,35 +456,13 @@ function update(){
 
     draw();
 }   
-
-//function calculateScore() {
-    // Add these lines where score updates:
-//    scoreElement.classList.add('score-pop');
-//    setTimeout(() => {
-//        scoreElement.classList.remove('score-pop');
-//    }, 300);
-    
-    // Add hit effect
- //   if (mult > 0) {
- //       ctx.fillStyle = 'rgba(0, 255, 0, 0.3)';
- //       ctx.beginPath();
- //       ctx.arc(x, y, 20, 0, Math.PI * 2);
- //       ctx.fill();
- //   }
-//}
-// DO NOT TOUCH BENEATH
-{
-// NO CLUE HOW THIS IS WORKING BUT IT WORKS!
-setInterval(update, 16);
 function main(){
-    update();
+    setInterval(update, 16);
 }
 
-// Initialize game
-dartboardImage.onload = () => {
-    applyInitial();
-    draw();
+function startGame(){
+    document.getElementById("startGame").style.display = "none";
+    playDartboardBounce();
     main();
 }
-};
 
