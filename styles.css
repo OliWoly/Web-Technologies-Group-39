@@ -79,6 +79,7 @@ main {
     display:flex;
     flex-direction: column;
     width:auto;
+    font-family: rodfat;
 }
 
 #scorediv {
@@ -89,7 +90,7 @@ main {
 #scoretitle {
     font-family: rodfat, sans-serif;
     color: #2A4747;
-    font-size: 1.5em;
+    font-size: 2em;
     margin-right: 0.5em;
 }
 
@@ -593,6 +594,10 @@ footer {
 }
 .bullseye {
     color:#2f354d;
+}
+
+.gameButtons {
+    flex-direction: column;
 }
 
 .note {
