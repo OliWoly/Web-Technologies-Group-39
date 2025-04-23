@@ -474,11 +474,6 @@ footer {
     margin: 0 auto 10px;
 }
 
-.bullseye { background: #e74c3c; }
-.outer-bull { background: #2ecc71; }
-.triple { background: #3498db; }
-.double { background: #f39c12; }
-
 .steps-list {
     padding-left: 1.5rem;
     line-height: 1.6;
@@ -552,7 +547,7 @@ footer {
     width:5em;
 }
 
-.leaderboardTitle {
+.titleHeading {
     color:white;
     font-family: rodfat;
     background-color: #2A4747;
@@ -562,6 +557,42 @@ footer {
     padding:0.6em;
     padding-bottom:1em;
     font-size:3em;
+}
+
+.headingBox {
+    background-color: white;
+    margin-top:2em;
+    padding:1em;
+    padding-top:-1em;   
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius:2em; 
+    width:50em;
+}
+
+.headingBoxSubtitle {
+    font-family: rodfat;
+    color: #3d3d3d;
+    text-align: center;
+    font-size:1.3em;
+}
+
+.headingBoxContent, .double, .triple, .doublebull, .bullseye{
+    color:#2f354d;
+    margin-left:2em;
+    margin-right:2em;
+}
+
+.double {
+    color:#CD7F32;
+}
+.triple {
+    color:#d35400;
+}
+.doublebull {
+    color:#2A4747;
+}
+.bullseye {
+    color:#2f354d;
 }
 
 .note {
