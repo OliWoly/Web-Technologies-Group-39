@@ -60,8 +60,9 @@ main {
 
 .stats {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    width: 100%;
+    width: auto;
     margin-bottom: 1.5em;
     background-color: #FFFFFF;
     padding: 1em;
@@ -69,10 +70,15 @@ main {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#gametitle h1 {
-    color: #2A4747;
-    margin: 0;
-    font-size: 2em;
+#gametitle{
+    display:flex;
+    text-align: center;
+}
+
+#uiValues {
+    display:flex;
+    flex-direction: column;
+    width:auto;
 }
 
 #scorediv {
@@ -532,8 +538,20 @@ footer {
 }
 
 .lTableColumn {
-    padding: 10px;
+    padding: 1.25em;
     width: 5em;
+}
+
+.leaderboardTitle {
+    color:#2f354d;
+    font-family: rodfat;
+    background-color: white;
+    border-radius: 0.5em;
+    text-align:center;
+    width:auto;
+    padding:0.6em;
+    padding-bottom:1em;
+    font-size:3em;
 }
 
 .note {

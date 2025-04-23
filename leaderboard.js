@@ -57,6 +57,8 @@ function populateLeaderboardTable(leaderboardEntries) {
     leaderboardEntries.forEach(entry => {
         i ++;
         const row = document.createElement("tr");
+
+        // change colours every other row.
         if (i % 2 == 0){
             row.className = "lTableRow";
         }
@@ -89,5 +91,5 @@ function main(){
     update();
 }
 // un-comment if want to run as a loop.
-//setInterval(update, 16);
+setInterval(update, 16);
 main();
