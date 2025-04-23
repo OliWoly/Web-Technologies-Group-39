@@ -23,25 +23,54 @@
     </div>
 
     <main>
-        <div class="stats">
-            <div id="gametitle">
-                <h1>Dartboard Game</h1>
-            </div>
-            <div id="uiValues">
-                <p id="scoreTitle">Total Score: <span id="score">0</span>
-                <p id="roundScoreTitle">Round Score: <span id="roundScore">0</span>
-                <p id="shotsLeftTitle">Shots Left: <span id="shotsLeft"><img width="48" height="16" src="dart.768x256.png"/></span>
-                
-
-                <button id="resetBtn" type="button">RESET</button>
-                <button id="initialBtn" type="button"></button>
-                <button id="leaderboardBtn" type="button">SEND SCORES</button>
-
-            </div>
+        <div id="headingBox">
+            <h1 class="titleHeading">Dartboard Game</h1>
         </div>
+        <div class="gameLayout">
+            <div class="stats">
+                <h1 class="statsTitle">S T A T S</h1>
 
-        <div class="gamediv">
-            <canvas id="dartboard" width="700" height="800"></canvas>
+                <div id="uiValues">
+                    <div class="statsHeading">
+                        <p id="scoreTitle">Total Score: </p><p id="score"> 0 </p>
+                    </div>
+                    <div class="statsHeading">
+                        <p id="roundScoreTitle">Round Score: <span id="roundScore">0</span>
+                    </div>
+                    <div class="statsHeading">
+                        <p id="shotsLeftTitle">Shots Left: <span id="shotsLeft"><img width="48" height="16" src="dart.768x256.png"/></span>
+                    </div>
+                </div>
+                    <div class="gameButtonsHeading">
+                        <button id="initialBtn" type="button">Initial: </button>
+                        <p class="buttonHelptext">
+                            Initial must be set before saving score.
+                        </p>
+                    </div>
+
+                    <div class="gameButtons">
+                        <div class="gameButtonsHeading">
+                            <button id="resetBtn" type="button">RESET</button>
+                            <p class="buttonHelptext">
+                                Save score under current initial.
+                            </p>
+                        </div>
+
+                    <div class="gameButtonsHeading">
+                        <button id="leaderboardBtn" type="button">SEND SCORES</button>
+                        <p class="buttonHelptext">
+                            Save all scores and send them to leaderboard.
+                        </p>
+                    </div> 
+                </div>
+            </div>
+
+
+
+            <div class="gamediv">
+                <button id="startGame">Start Game</button>
+                <canvas id="dartboard" width="700" height="800"></canvas>
+            </div>
             <script src="game.js"></script>
         </div>
     </main>

@@ -2,6 +2,11 @@ const canvas = document.getElementById('dartboard');
 const ctx = canvas.getContext('2d');
 canvas.addEventListener('click', handleClick);
 
+var startGameElement = document.getElementById('startGame');
+startGameElement.addEventListener('click', startGame)
+
+
+
 
 // Value Initialisation
 {
@@ -78,17 +83,9 @@ canvas.addEventListener('click', handleClick);
         function playShoot1() {
             new Audio("shoot1.wav").play();
         }
-        
-        function playShoot2x() {
-            new Audio("shoot2.wav").play();
-        }
-        
-        function playShoot3x() {
-            new Audio("shoot3.wav").play();
-        }
-        
-        function playBullseye() {
-            new Audio("bullseye.wav").play();
+
+        function playSendScores() {
+            new Audio("sendScores.wav").play();
         }
         
         function playReset() {
@@ -296,7 +293,7 @@ function calculateScore(x, y, dartboardCenterX, dartboardCenterY) {
     // Flash if scored
     if (mult > 0){
         changeScoreColour([255, 0, 0]);
-
+        playShoot1();
 
         if (shotsLeftInternal > 0){
             changeRoundScoreColour([255, 0, 0]);
@@ -308,6 +305,7 @@ function calculateScore(x, y, dartboardCenterX, dartboardCenterY) {
     else {
         changeScoreColour([255, 255, 255]);
         changeRoundScoreColour([255, 255, 255]);
+        playMiss();
     }
 
     // Add to total score.
@@ -325,7 +323,6 @@ function handleClick(event) {
     const dartboardCenterX = dartboardX + (dartboardW/2);
     const dartboardCenterY = dartboardY + (dartboardH/2);
 
-    playShoot1();
     calculateScore(x, y, dartboardCenterX, dartboardCenterY);
     // Count Shots
     shotsLeftInternal -= 1;
@@ -333,6 +330,7 @@ function handleClick(event) {
 }
 
 function bounceOfWall(isVertical) {
+    playDartboardBounce();
     if (isVertical) {
         direction = 180 - direction; // Reflect angle horizontally
     } else {
@@ -428,6 +426,7 @@ function addLeaderboardEntry(initial, score, round){
 }
 
 function sendScoresToLocalStorage(){
+    playSendScores();
     localStorage.setItem("Leaderboard", JSON.stringify(rounds));
 }
 
@@ -441,10 +440,7 @@ function applyInitial(){
     initialButtonElement.textContent = initialButtonText
 }
 
-
-
 // Function for game running.
-// main function
 function update(){
     bounceDartboard();
     fadeColourToBlack(scoreColour);
@@ -453,35 +449,13 @@ function update(){
 
     draw();
 }   
-
-//function calculateScore() {
-    // Add these lines where score updates:
-//    scoreElement.classList.add('score-pop');
-//    setTimeout(() => {
-//        scoreElement.classList.remove('score-pop');
-//    }, 300);
-    
-    // Add hit effect
- //   if (mult > 0) {
- //       ctx.fillStyle = 'rgba(0, 255, 0, 0.3)';
- //       ctx.beginPath();
- //       ctx.arc(x, y, 20, 0, Math.PI * 2);
- //       ctx.fill();
- //   }
-//}
-// DO NOT TOUCH BENEATH
-{
-// NO CLUE HOW THIS IS WORKING BUT IT WORKS!
-setInterval(update, 16);
 function main(){
-    update();
+    setInterval(update, 16);
 }
 
-// Initialize game
-dartboardImage.onload = () => {
-    applyInitial();
-    draw();
+function startGame(){
+    document.getElementById("startGame").style.display = "none";
+    playDartboardBounce();
     main();
 }
-};
 
