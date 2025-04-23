@@ -10,12 +10,6 @@ class LeaderboardEntry{
     }
 }
 
-
-
-
-
-
-
 function loadLeaderboard(){
     isLeaderboardLoaded = true;
     var leaderboardEntries = [];
@@ -45,25 +39,39 @@ function parseLeaderboardData(scores, leaderboardEntries){
     for (i=0; i < scores.length; i++){
         entry = new LeaderboardEntry(scores[i][0], scores[i][1], scores[i][2], scores[i][3], scores[i][4]);
         leaderboardEntries.push(entry);
+
+        // Clamp shots left to 0.
+        if (leaderboardEntries[i].shotsLeft < 0){
+            leaderboardEntries[i].shotsLeft = 0;
+        }
     }
+
 }
 
 function populateLeaderboardTable(leaderboardEntries) {
     const tableBody = document.querySelector("#leaderboardTable tbody");
     tableBody.innerHTML = "";
 
-
+    i = 1;
     // For each entry create a new row in the table by modifying the html.
     leaderboardEntries.forEach(entry => {
+        i ++;
         const row = document.createElement("tr");
+        if (i % 2 == 0){
+            row.className = "lTableRow";
+        }
+        else {
+            row.className = "lTableRow2";
+        }
+        
 
         // actual row data with each field here being a table heading.
         row.innerHTML = `
-            <td>${entry.name}</td>
-            <td>${entry.score}</td>
-            <td>${entry.round}</td>
-            <td>${entry.shotsLeft}</td>
-            <td>${entry.time}</td>
+            <td class="lTableColumn">${entry.name}</td>
+            <td class="lTableColumn">${entry.score}</td>
+            <td class="lTableColumn">${entry.round}</td>
+            <td class="lTableColumn">${entry.shotsLeft}</td>
+            <td class="lTableColumn">${entry.time}</td>
         `;
 
         tableBody.appendChild(row);
